@@ -1,0 +1,30 @@
+# PostRabbit Backend — Python dependencies
+#
+# Install with:
+#   pip install -r requirements.txt
+
+# --- Web framework ---
+fastapi
+uvicorn
+
+# --- Database ---
+sqlalchemy
+psycopg2-binary
+
+# --- Data validation ---
+pydantic
+
+# --- Configuration ---
+python-dotenv
+
+# --- Video / audio processing ---
+yt-dlp
+ffmpeg-python
+torch
+silero-vad
+soundfile
+numpy
+
+# --- LLM / API clients ---
+openai
+requests
