@@ -20,7 +20,6 @@ python-dotenv
 # --- Video / audio processing ---
 yt-dlp
 ffmpeg-python
-torch
 silero-vad
 soundfile
 numpy
