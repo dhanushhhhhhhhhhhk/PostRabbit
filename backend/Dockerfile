@@ -17,16 +17,22 @@ FROM python:3.11-slim
 
 # ------------------------------------------------------------------
 # 2. Install system-level dependencies
-#    - ffmpeg : audio normalisation (normalize.py) and segment
-#               extraction (transcribe.py)
-#    - git    : required by torch.hub to download the Silero VAD model
-#    - curl   : useful for health-check probes and debugging
+#    - ffmpeg          : audio normalisation (normalize.py) and segment
+#                        extraction (transcribe.py)
+#    - git             : required by torch.hub to download the Silero VAD model
+#    - curl            : useful for health-check probes and debugging
+#    - build-essential : C/C++ compiler toolchain needed by torch and
+#                        native Python extensions
+#    - libgl1          : OpenGL library required by some audio/video
+#                        processing packages
 # ------------------------------------------------------------------
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         ffmpeg \
         git \
         curl \
+        build-essential \
+        libgl1 \
     && rm -rf /var/lib/apt/lists/*
 
 # ------------------------------------------------------------------
