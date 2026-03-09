@@ -63,4 +63,4 @@ EXPOSE 8000
 # 8. Default start command — FastAPI API server
 #    Override this with "python -m worker.worker" for the worker service.
 # ------------------------------------------------------------------
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
