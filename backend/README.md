@@ -24,7 +24,6 @@ backend/
     pipeline/
       download.py    — yt-dlp audio download
       normalize.py   — ffmpeg audio normalization
-      vad.py         — Silero VAD speech detection
       transcribe.py  — Whisper transcription
       summarize.py   — OpenRouter LLM summarization
   requirements.txt
@@ -34,7 +33,7 @@ backend/
 ## Processing Pipeline
 
 ```
-URL → yt-dlp → ffmpeg → Silero VAD → Whisper → OpenRouter LLM → PostgreSQL
+URL → yt-dlp → ffmpeg → Whisper → OpenRouter LLM → PostgreSQL
 ```
 
 ## Quick Start
@@ -73,6 +72,5 @@ python -m worker.worker
 - **SQLAlchemy** — ORM / database toolkit
 - **yt-dlp** — video/audio downloader
 - **ffmpeg** — audio normalization
-- **Silero VAD** — voice activity detection
 - **Whisper** — speech-to-text
 - **OpenRouter** — LLM summarization

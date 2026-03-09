@@ -2,7 +2,7 @@
 job.py — SQLAlchemy model for processing jobs.
 
 Each Job row represents a single attempt to process a piece of content
-through the pipeline (download → normalize → VAD → transcribe → summarize).
+through the pipeline (download → normalize → transcribe → summarize).
 
 Jobs are separated from Content so that:
   - We can retry processing without duplicating the content record.

@@ -17,19 +17,13 @@ FROM python:3.11-slim
 
 # ------------------------------------------------------------------
 # 2. Install minimal system-level dependencies
-#    - ffmpeg : audio normalisation (normalize.py) and segment
-#               extraction (transcribe.py)
-#    - git    : required by torch.hub to download the Silero VAD model
+#    - ffmpeg : audio normalisation (normalize.py)
 #    - curl   : useful for health-check probes and debugging
-#    - libgl1 : OpenGL library required by some audio/video
-#               processing packages
 # ------------------------------------------------------------------
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         ffmpeg \
-        git \
         curl \
-        libgl1 \
     && rm -rf /var/lib/apt/lists/*
 
 # ------------------------------------------------------------------
@@ -45,10 +39,6 @@ WORKDIR /app
 COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
-
-# Install lightweight CPU-only PyTorch to avoid the ~4 GB CUDA bundle
-# that ships with the default torch wheel.
-RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
 
 # Ensure yt-dlp is at the latest version (it updates frequently to
 # keep up with site changes).

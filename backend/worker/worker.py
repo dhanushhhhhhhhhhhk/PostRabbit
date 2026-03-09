@@ -6,9 +6,8 @@ through the processing pipeline:
 
     1. download_audio      — Fetch audio via yt-dlp
     2. normalize_audio     — Normalize audio with ffmpeg
-    3. detect_speech       — Detect speech segments with Silero VAD
-    4. transcribe_segments — Transcribe speech with Whisper
-    5. generate_summary    — Generate summary & key points via OpenRouter LLM
+    3. transcribe_segments — Transcribe full audio with Whisper
+    4. generate_summary    — Generate summary & key points via OpenRouter LLM
 
 Concurrency safety
 ------------------
@@ -58,7 +57,6 @@ logger = logging.getLogger("worker")
 
 from worker.pipeline.download import download_audio
 from worker.pipeline.normalize import normalize_audio
-from worker.pipeline.vad import detect_speech_segments
 from worker.pipeline.transcribe import transcribe_segments
 from worker.pipeline.summarize import generate_summary
 
@@ -124,15 +122,14 @@ def process_job(db: Session, job: Job) -> None:
     try:
         # --------------------------------------------------------------
         # 2. Run pipeline stages
-        #    download → normalize → VAD → transcribe → summarize
+        #    download → normalize → transcribe → summarize
         # --------------------------------------------------------------
         url = content.url if content else ""
         logger.info("Starting pipeline for job %s — url=%s", job.id, url)
 
         audio_path = download_audio(url)
         normalized_path = normalize_audio(audio_path)
-        segments = detect_speech_segments(normalized_path)
-        transcript = transcribe_segments(normalized_path, segments)
+        transcript = transcribe_segments(normalized_path)
         result = generate_summary(transcript)
 
         logger.info("Pipeline completed for job %s", job.id)

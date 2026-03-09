@@ -7,10 +7,10 @@ Responsibility:
     transcription.
 
 Why these settings?
-    - Mono (-ac 1):    Whisper and most VAD models expect single-channel
-                       audio.  Mixing to mono also halves the data size.
-    - 16 kHz (-ar 16000): The native sample rate for Whisper and Silero
-                       VAD.  Resampling here avoids redundant work later.
+    - Mono (-ac 1):    Whisper expects single-channel audio.  Mixing
+                       to mono also halves the data size.
+    - 16 kHz (-ar 16000): The native sample rate for Whisper.
+                       Resampling here avoids redundant work later.
 
 The original file is intentionally NOT deleted — cleanup is handled by a
 later pipeline stage.

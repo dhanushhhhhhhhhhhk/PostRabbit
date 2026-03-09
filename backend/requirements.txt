@@ -20,9 +20,6 @@ python-dotenv
 # --- Video / audio processing ---
 yt-dlp
 ffmpeg-python
-silero-vad
-soundfile
-numpy
 
 # --- LLM / API clients ---
 openai
